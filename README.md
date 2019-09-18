@@ -10,7 +10,7 @@ This course has 10 homeworks. The 10 homeworks are as follows:
 <!--ts-->
    0. [Environment](https://github.com/vincent0628/CV2019Fall/blob/master/README.md#environment)
    1. [Basic Image Manipulation](https://github.com/vincent0628/CV2019Fall/blob/master/README.md#hw1-basic-image-manipulation)
-
+   2. [Basic Image Manipulation](https://github.com/vincent0628/CV2019Fall/blob/master/README.md#hw2-basic-image-manipulation)
 
 <!--te-->
 # Environment
@@ -27,7 +27,19 @@ This course has 10 homeworks. The 10 homeworks are as follows:
    * Rotate lena.bmp 45 degrees clockwise.
    * Shrink lena.bmp in half.
    * Binarize lena.bmp at 128 to get a binary image.
-   * Code: [HW1](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW1_ver1/R08921005_HW1_ver1.py)
-            
+
+* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW1_ver1/R08921005_HW1_ver1.py)
 * [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW1_ver1/R08921005_HW1_ver1.pdf)
 
+# HW2: Basic Image Manipulation
+* Part 1 of this homework is to binarize lena.bmp with threshold 128 (0-127, 128-255).
+   
+* Part 2 of this homework is to draw the histogram of lena.bmp.
+
+* Part 3 of this homework is to find connected components with following rules:
+   * Draw bounding box of regions.
+   * Draw cross at centroid of regions.
+   * Omit regions that have a pixel count less than 500.
+
+* [Code](https://github.com/JasonYao81000/CV2017Fall/tree/master/HW2/HW2.3)
+* [Report](https://github.com/JasonYao81000/CV2017Fall/blob/master/HW2/CV1_HW2_%E5%A7%9A%E5%98%89%E6%98%87_R06922002.pdf)
