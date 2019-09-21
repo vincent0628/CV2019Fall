@@ -8,7 +8,7 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 import cv2
-from statistics import mean
+
 lena_pic = Image.open("lena.bmp")
 original_lena_array = np.array(lena_pic)
 
@@ -39,7 +39,6 @@ fig = ax.get_figure()
 fig.savefig("histogram.png")
 
 # (c)    connected components
-
 class Stack:
     def __init__(self):
         self.list = []
@@ -52,7 +51,6 @@ class Stack:
 
     def isEmpty(self):
         return len(self.list) == 0
-
 
 thresholdRegionPixels = 500
 height,width=original_lena_array.shape
@@ -84,24 +82,25 @@ for ii in range(len(original_lena_array)):
                 numberOfLabelDict[labelId]=numberOfCurrentLabel
             numberOfCurrentLabel=0
             labelId+=1
-#   初始畫框框矩陣
+
 rectangles={}  
 for key in numberOfLabelDict:
     currentKeyX,currentKeyY=np.where(labeledImageArray == key)
     point1=(min(currentKeyY),min(currentKeyX))
     point2=(max(currentKeyY),max(currentKeyX))
-    rectangles[key]=[point1,point2]
+    middlePointY=int((min(currentKeyY)+max(currentKeyY))/2)
+    middlePointX=int((min(currentKeyX)+max(currentKeyX))/2)
+    middlePoint=(middlePointY,middlePointX)
+    rectangles[key]=[point1,point2,middlePoint]
    
-
 connected_lena_array = np.zeros((height,width,3))
 connected_lena_array[:,:,0]=binarize_lena_array
 connected_lena_array[:,:,1]=binarize_lena_array
 connected_lena_array[:,:,2]=binarize_lena_array
 
 for points in rectangles:   
-    print(rectangles[points][2])
     cv2.rectangle(connected_lena_array, rectangles[points][0],  rectangles[points][1], (255,0, 0), 2)
-#    cv2.line(connected_lena_array, rectangles[points][2], , (255,0, 0, ), 5)
+    cv2.circle(connected_lena_array,rectangles[points][2], 8, (255, 0, 0), thickness=-1)
 Image.fromarray(connected_lena_array.astype(np.uint8)).save('connected_lena.bmp')
     
     
