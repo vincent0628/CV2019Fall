@@ -41,5 +41,5 @@ This course has 10 homeworks. The 10 homeworks are as follows:
    * Draw cross at centroid of regions.
    * Omit regions that have a pixel count less than 500.
 
-* [Code](https://github.com/JasonYao81000/CV2017Fall/tree/master/HW2/HW2.3)
-* [Report](https://github.com/JasonYao81000/CV2017Fall/blob/master/HW2/CV1_HW2_%E5%A7%9A%E5%98%89%E6%98%87_R06922002.pdf)
+* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW2_ver1/R08921005_HW2_ver1.py)
+* [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW2_ver1/R08921005_HW2_ver1.pdf)
