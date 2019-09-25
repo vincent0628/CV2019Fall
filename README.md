@@ -15,7 +15,7 @@ This course has 10 homeworks. The 10 homeworks are as follows:
 <!--te-->
 # Environment
 * Programming Language: Python 3
-* Programming IDE: Visual Studio Code
+* Programming IDE: Spyder
 * Operating System: Windows 10 x64
 
 # HW1: Basic Image Manipulation
@@ -43,3 +43,13 @@ This course has 10 homeworks. The 10 homeworks are as follows:
 
 * [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW2_ver1/R08921005_HW2_ver1.py)
 * [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW2_ver1/R08921005_HW2_ver1.pdf)
+
+# HW3: Histogram Equalization
+* This homework is to do histogram equalization with following rules:
+   * Do histogram on original lena image.
+   * Adjust the brightness of lena.bmp to one-third.
+   * Do histogram equalization on dark image.
+   * Show the histogram of the final image.
+   * Code: [HW3](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW3_ver1/R08921005_HW3_ver1.pdf)
+   
+* [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW3_ver1/R08921005_HW3_ver1.pdf)
