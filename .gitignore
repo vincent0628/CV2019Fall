@@ -3,3 +3,7 @@
 
 # Word temporary
 ~$*.doc*
+
+*.csv
+*.png
+*.bmp
