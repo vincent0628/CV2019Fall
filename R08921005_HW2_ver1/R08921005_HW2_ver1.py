@@ -9,6 +9,9 @@ import numpy as np
 import pandas as pd
 import cv2
 
+def average(lst): 
+    return sum(lst) / len(lst) 
+
 lena_pic = Image.open("lena.bmp")
 original_lena_array = np.array(lena_pic)
 
@@ -88,8 +91,8 @@ for key in numberOfLabelDict:
     currentKeyX,currentKeyY=np.where(labeledImageArray == key)
     point1=(min(currentKeyY),min(currentKeyX))
     point2=(max(currentKeyY),max(currentKeyX))
-    middlePointY=int((min(currentKeyY)+max(currentKeyY))/2)
-    middlePointX=int((min(currentKeyX)+max(currentKeyX))/2)
+    middlePointY=int(average(currentKeyY))
+    middlePointX=int(average(currentKeyX))
     middlePoint=(middlePointY,middlePointX)
     rectangles[key]=[point1,point2,middlePoint]
    
