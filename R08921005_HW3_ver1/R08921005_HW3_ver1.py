@@ -10,10 +10,11 @@ import pandas as pd
 
 lena_pic = Image.open("lena.bmp")
 original_lena_array = np.array(lena_pic)
-height,width=original_lena_array.shape
+height, width = original_lena_array.shape
 
-def getHistogram(picArray,name):
-    histogram=np.zeros(256)
+
+def getHistogram(picArray, name):
+    histogram = np.zeros(256)
     for r in picArray:
         for pixel in r:
             histogram[pixel] += 1
@@ -27,29 +28,31 @@ def getHistogram(picArray,name):
     fig = ax1.get_figure()
     fig.savefig(name+'_histogram.png')
     return(histogram)
-    
-#(a)    original image and its histogram
-name='original_lena'   
-getHistogram(original_lena_array,name)
 
-#(b)    image with intensity divided by 3 and its histogram
-name='dark_lena'   
+
+# (a)    original image and its histogram
+name = 'original_lena'
+getHistogram(original_lena_array, name)
+
+# (b)    image with intensity divided by 3 and its histogram
+name = 'dark_lena'
 dark_lena_array = original_lena_array.copy()
 for row in range(height):
     for col in range(width):
-        dark_lena_array[row,col]=original_lena_array[row,col]//3
+        dark_lena_array[row, col] = original_lena_array[row, col]//3
 Image.fromarray(dark_lena_array.astype(np.uint8)).save(name+'.bmp')
-dark_lena_histogram=getHistogram(dark_lena_array,name)
+dark_lena_histogram = getHistogram(dark_lena_array, name)
 
-#(c)    image after applying histogram equalization to (b) and its histogram
-name='histeq_lena'  
+# (c)    image after applying histogram equalization to (b) and its histogram
+name = 'histeq_lena'
 histeq_lena_array = dark_lena_array.copy()
 transformTable = np.zeros(256)
 for ii in range(len(transformTable)):
-    transformTable[ii] = int(255 * np.sum(dark_lena_histogram[0:ii + 1]) / (width * height))
-    
+    transformTable[ii] = int(
+        255 * np.sum(dark_lena_histogram[0:ii + 1]) / (width * height))
+
 for row in range(height):
     for col in range(width):
-        histeq_lena_array[row,col]=transformTable[dark_lena_array[row,col]]
+        histeq_lena_array[row, col] = transformTable[dark_lena_array[row, col]]
 Image.fromarray(histeq_lena_array.astype(np.uint8)).save(name+'.bmp')
-histeq_lena_histogram=getHistogram(histeq_lena_array,name)
+histeq_lena_histogram = getHistogram(histeq_lena_array, name)
