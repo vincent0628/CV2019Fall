@@ -48,8 +48,8 @@ This course has 10 homeworks. The 10 homeworks are as follows:
   * Draw cross at centroid of regions.
   * Omit regions that have a pixel count less than 500.
 
-* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW2_ver1/R08921005_HW2_ver1.py)
-* [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW2_ver1/R08921005_HW2_ver1.pdf)
+* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW2_ver2/R08921005_HW2_ver2.py)
+* [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW2_ver2/R08921005_HW2_ver2.pdf)
 
 ## HW3: Histogram Equalization
 
