@@ -58,5 +58,5 @@ This course has 10 homeworks. The 10 homeworks are as follows:
   * Adjust the brightness of lena.bmp to one-third.
   * Do histogram equalization on dark image.
   * Show the histogram of the final image.
-* [Code]: (https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW3_ver1/R08921005_HW3_ver1.pdf)
+* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW3_ver1/R08921005_HW3_ver1.py)
 * [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW3_ver1/R08921005_HW3_ver1.pdf)
