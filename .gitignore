@@ -7,3 +7,6 @@
 *.csv
 *.png
 *.bmp
+
+# But not these files...
+!lena.bmp
