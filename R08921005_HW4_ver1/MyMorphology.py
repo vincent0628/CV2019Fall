@@ -41,7 +41,7 @@ def erosion(originalImage, kernel, centerKernel):
                         if ((0 < targetX < originalImage.size[0])
                                 and (0 < targetY < originalImage.size[1])):
                             if (originalImage.getpixel(
-                                (targetX, targetY)) == 0):
+                                    (targetX, targetY)) == 0):
                                 matchFlag = False
                                 break
                         else:
@@ -59,6 +59,7 @@ def opening(originalImage, kernel, centerKernel):
 def closing(originalImage, kernel, centerKernel):
     return erosion(dilation(originalImage, kernel, centerKernel), kernel, centerKernel)
 
+
 def complement(originalImage):
     complementImage = Image.new('1', originalImage.size)
     for r in range(originalImage.size[0]):
@@ -67,7 +68,8 @@ def complement(originalImage):
                 complementImage.putpixel((r, c), 1)
             else:
                 complementImage.putpixel((r, c), 0)
-    return  complementImage
+    return complementImage
+
 
 def intersection(image1, image2):
     intersectionImage = Image.new('1', image1.size)
@@ -81,6 +83,7 @@ def intersection(image1, image2):
                 intersectionImage.putpixel((r, c), 0)
     return intersectionImage
 
+
 def erosionWithCenter(originalImage, kernel, centerKernel):
     erosionImage = Image.new('1', originalImage.size)
     for r in range(originalImage.size[0]):
@@ -91,8 +94,8 @@ def erosionWithCenter(originalImage, kernel, centerKernel):
                     if (kernel[x, y] == 1):
                         destX = r + (x - centerKernel[0])
                         destY = c + (y - centerKernel[1])
-                        if ((0 <= destX < originalImage.size[0]) and \
-                            (0 <= destY < originalImage.size[1])):
+                        if ((0 <= destX < originalImage.size[0]) and
+                                (0 <= destY < originalImage.size[1])):
                             if (originalImage.getpixel((destX, destY)) == 0):
                                 matchFlag = False
                                 break
@@ -103,6 +106,7 @@ def erosionWithCenter(originalImage, kernel, centerKernel):
                 erosionImage.putpixel((r, c), 1)
     return erosionImage
 
+
 def hitmiss(originalImage, kernel_J, centerKernel_J, kernel_K, centerKernel_K):
-    return  intersection(erosion(originalImage, kernel_J, centerKernel_J),
-                         erosion(complement(originalImage), kernel_K, centerKernel_K))
+    return intersection(erosion(originalImage, kernel_J, centerKernel_J),
+                        erosion(complement(originalImage), kernel_K, centerKernel_K))
