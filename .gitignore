@@ -10,3 +10,12 @@
 
 # But not these files...
 !lena.bmp
+
+  
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# zip
+*zip
