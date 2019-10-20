@@ -22,8 +22,8 @@ def dilation(originalImage, kernel, centerKernel):
                         if (kernel[ii, jj]):
                             targetX = r + (ii - centerKernel[0])
                             targetY = c + (jj - centerKernel[1])
-                            if ((0 < targetX < originalImage.size[0])
-                                    and (0 < targetY < originalImage.size[1])):
+                            if ((0 <= targetX < originalImage.size[0])
+                                    and (0 <= targetY < originalImage.size[1])):
                                 dilationImage.putpixel((targetX, targetY), 1)
     return dilationImage
 
@@ -38,8 +38,8 @@ def erosion(originalImage, kernel, centerKernel):
                     if (kernel[ii, jj] and matchFlag):
                         targetX = r + (ii - centerKernel[0])
                         targetY = c + (jj - centerKernel[1])
-                        if ((0 < targetX < originalImage.size[0])
-                                and (0 < targetY < originalImage.size[1])):
+                        if ((0 <= targetX < originalImage.size[0])
+                                and (0 <= targetY < originalImage.size[1])):
                             if (originalImage.getpixel(
                                     (targetX, targetY)) == 0):
                                 matchFlag = False
