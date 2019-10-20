@@ -60,3 +60,25 @@ This course has 10 homeworks. The 10 homeworks are as follows:
   * Show the histogram of the final image.
 * [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW3_ver1/R08921005_HW3_ver1.py)
 * [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW3_ver1/R08921005_HW3_ver1.pdf)
+
+# HW4: Mathematical Morphology - Binary Morphology
+* This homework is to do binary morphology with following rules:
+   * Please use the octagonal 3-5-5-5-3 kernel.
+   * Please use the “L” shaped kernel to detect the upper-right corner for hit-and-miss transform.
+   * Please process the white pixels (operating on white pixels).
+   * Five images should be included in your report: Dilation, Erosion, Opening, Closing, and Hit-and-Miss.
+   
+* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW4_ver1/HW4.py)
+* [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW4_ver1/R08921005_HW4_ver1.pdf)
+
+
+# HW5: Mathematical Morphology - Gray Scaled Morphology
+
+* This homework is to do gray scaled morphology with following rules:
+   * Please use the octagonal 3-5-5-5-3 kernel.
+   * Please take the local maxima or local minima respectively.
+   * Four images should be included in your report: Dilation, Erosion, Opening, and Closing.
+  
+* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW5_ver1/HW4.py) 
+* [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW5_ver1/R08921005_HW5_ver1.pdf)
+
