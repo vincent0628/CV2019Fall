@@ -84,29 +84,6 @@ def intersection(image1, image2):
     return intersectionImage
 
 
-def erosionWithCenter(originalImage, kernel, centerKernel):
-    erosionImage = Image.new('1', originalImage.size)
-    for r in range(originalImage.size[0]):
-        for c in range(originalImage.size[1]):
-            matchFlag = True
-            for x in range(kernel.shape[0]):
-                for y in range(kernel.shape[1]):
-                    if (kernel[x, y] == 1):
-                        destX = r + (x - centerKernel[0])
-                        destY = c + (y - centerKernel[1])
-                        if ((0 <= destX < originalImage.size[0]) and
-                                (0 <= destY < originalImage.size[1])):
-                            if (originalImage.getpixel((destX, destY)) == 0):
-                                matchFlag = False
-                                break
-                        else:
-                            matchFlag = False
-                            break
-            if (matchFlag):
-                erosionImage.putpixel((r, c), 1)
-    return erosionImage
-
-
 def hitmiss(originalImage, kernel_J, centerKernel_J, kernel_K, centerKernel_K):
     return intersection(erosion(originalImage, kernel_J, centerKernel_J),
                         erosion(complement(originalImage), kernel_K, centerKernel_K))
