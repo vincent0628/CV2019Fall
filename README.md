@@ -79,6 +79,22 @@ This course has 10 homeworks. The 10 homeworks are as follows:
    * Please take the local maxima or local minima respectively.
    * Four images should be included in your report: Dilation, Erosion, Opening, and Closing.
   
-* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW5_ver1/HW4.py) 
+* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW5_ver1/HW5.py) 
 * [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW5_ver1/R08921005_HW5_ver1.pdf)
 
+
+# HW6: Yokoi Connectivity Number
+* This homework is to do Yokoi connectivity number with following rules:
+   * Please binarize leba.bmp with threshold 128.
+   * Please down sampling binary.bmp from 512x512 to 64x64, using 8x8 blocks as unit and take the topmost-left pixel as the down sampling data.
+   * Print Yokoi connectivity number to text file.
+* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW6_ver1/HW6.py)
+* [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW6_ver1/R08921005_HW6_ver1.pdf)
+
+
+# HW7: Thinning
+* This homework is to do thinning operation with following rules:
+   * Please binarize leba.bmp with threshold 128.
+   * Do thinning operation on binary image.
+* [Code](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW7_ver1/HW7.py)
+* [Report](https://github.com/vincent0628/CV2019Fall/blob/master/R08921005_HW7_ver1/R08921005_HW7_ver1.pdf)
