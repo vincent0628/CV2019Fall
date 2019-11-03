@@ -67,7 +67,7 @@ def Yokoi(originalImage):
     """
     type originalImage: Image ,return: numpy array
     """    
-    YokoiConnectivityNumber = np.full(downsamplingImage.size, ' ')
+    YokoiConnectivityNumber = np.full(originalImage.size, ' ')
 
     for x in range(originalImage.size[0]):
         for y in range(originalImage.size[1]):
@@ -83,13 +83,86 @@ def Yokoi(originalImage):
     
     return YokoiConnectivityNumber
 
+def pairRelationship(matrix):
+    # 1: p, 2: q
+    
+    r, c = matrix.shape
+    paired_matrix = np.zeros(matrix.shape, dtype=int)
+    for i in range(r):
+        for j in range(c):
+            if matrix[i][j] != '1': # Yokoi number != 1
+                paired_matrix[i][j] = 2  # Set to q
+            else:   #Yokoi number == 1
+                flag = True
+                neighbor4 = [(1,0), (0,-1), (-1,0), (0,1)]
+                for m, n in neighbor4:
+                    if 0 <= i+m < r and 0 <= j+n < c:
+                        if matrix[i+m][j+n] == '1':  # Exist a neighbor' Yokoi number = 1
+                            paired_matrix[i][j] = 1   # Set to p
+                            flag = False
+                            break
+                if flag:
+                    paired_matrix[i][j] = 2
+                    
+    return paired_matrix
+
+    
+def connectedShrink_h(b, c, d, e):
+    if b == c and (b != d or b != e):
+        return 1
+    else:
+        return 0
+    
+def connectedShrink_f(a1, a2, a3, a4):
+    return  [a1, a2, a3, a4].count(1)==1
+    
+def connectedShrink(img, matrix):
+    img = np.array(img)
+    r, c = img.shape
+    flag = False
+    for i in range(r):
+        for j in range(c):
+            if img[i][j] == True:
+                
+                x = [0 for i in range(9)]
+                x[0] = img[i][j]
+                index = 0
+                neighbor8 = [(1,0), (0,-1), (-1,0), (0,1), (1,1), (1,-1), (-1,-1), (-1,1)]
+                for m, n in neighbor8:
+                    index += 1
+                    if 0 <= i+m < r and 0 <= j+n < c:
+                        x[index] = img[i+m][j+n]
+
+                a1 = connectedShrink_h(x[0], x[1], x[6], x[2])
+                a2 = connectedShrink_h(x[0], x[2], x[7], x[3])
+                a3 = connectedShrink_h(x[0], x[3], x[8], x[4])
+                a4 = connectedShrink_h(x[0], x[4], x[5], x[1])
+                
+                number = connectedShrink_f(a1, a2, a3, a4)
+                
+                if number == 1: # Yokoi number = 1 (edge)
+                    if matrix[i][j] == 1:
+                        img[i][j] = 0
+                        flag = True
+    return img, flag
+
+
 if __name__ == '__main__':
     from PIL import Image
     import numpy as np
 
     lena = Image.open("lena.bmp")
     binary_lena = lena.point(lambda x: 0 if x < 128 else 255, '1')
-    downsamplingImage = downsampling(binary_lena, 8)
-    downsamplingImage.save('downsampling.bmp')
-    YokoiConnectivityNumber = Yokoi(downsamplingImage)
-    np.savetxt('YokoiConnectivityNumber.txt',YokoiConnectivityNumber,delimiter='',fmt='%s')
+    downsampling_image = downsampling(binary_lena, 8)
+    downsampling_image.save('downsampling.bmp')
+    thinning_image = downsampling_image.copy()
+    check = True
+    iteration=1
+    while check:
+        yokoi_matrix = Yokoi(thinning_image)
+        paired_matrix = pairRelationship(yokoi_matrix)
+        iteration+=1
+        thinning_image, check = connectedShrink(thinning_image, paired_matrix)
+        thinning_image=Image.fromarray(thinning_image)
+    thinning_image.save('thinning.bmp')  
+        
