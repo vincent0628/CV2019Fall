@@ -4,6 +4,8 @@ Created on Sun Oct 20 10:32:58 2019
 
 @author: vincent黃國郡
 """
+
+
 def downsampling(originalImage, sampleFactor):
     """
     originalImage: Image,sampleFactor: int, return Image 
@@ -14,9 +16,11 @@ def downsampling(originalImage, sampleFactor):
     downsamplingImage = Image.new('1', (downsamplingWidth, downsamplingHeight))
     for x in range(downsamplingWidth):
         for y in range(downsamplingHeight):
-            originalPixel = originalImage.getpixel((x * sampleFactor, y * sampleFactor))
+            originalPixel = originalImage.getpixel(
+                (x * sampleFactor, y * sampleFactor))
             downsamplingImage.putpixel((x, y), originalPixel)
     return downsamplingImage
+
 
 def getNeighborhood(originalImage, position):
     """
@@ -29,17 +33,18 @@ def getNeighborhood(originalImage, position):
         for yy in range(3):
             targetX = x + (xx - 1)
             targetY = y + (yy - 1)
-            if ((0 <= targetX < originalImage.size[0]) and \
-                (0 <= targetY < originalImage.size[1])):
+            if ((0 <= targetX < originalImage.size[0]) and
+                    (0 <= targetY < originalImage.size[1])):
                 pixelValue = originalImage.getpixel((targetX, targetY))
                 neighborhood.append(pixelValue)
             else:
                 neighborhood.append(0)
     neighborhood = [
-        neighborhood[4], neighborhood[7], neighborhood[3], 
-        neighborhood[1], neighborhood[5], neighborhood[8], 
+        neighborhood[4], neighborhood[7], neighborhood[3],
+        neighborhood[1], neighborhood[5], neighborhood[8],
         neighborhood[6], neighborhood[0], neighborhood[2]]
     return neighborhood
+
 
 def Yokoi_h(b, c, d, e):
     """
@@ -51,8 +56,8 @@ def Yokoi_h(b, c, d, e):
         return 'r'
     if (b != c):
         return 's'
-    
-    
+
+
 def Yokoi_f(a1, a2, a3, a4):
     """
     type of  b,c,d,e: int  return: str
@@ -62,11 +67,12 @@ def Yokoi_f(a1, a2, a3, a4):
         return 5
     else:
         return [a1, a2, a3, a4].count('q')
-    
+
+
 def Yokoi(originalImage):
     """
     type originalImage: Image ,return: numpy array
-    """    
+    """
     YokoiConnectivityNumber = np.full(originalImage.size, ' ')
 
     for x in range(originalImage.size[0]):
@@ -74,76 +80,93 @@ def Yokoi(originalImage):
             if (originalImage.getpixel((x, y))):
                 neighborhood = getNeighborhood(originalImage, (x, y))
                 YokoiConnectivityNumber[y, x] = Yokoi_f(
-                    Yokoi_h(neighborhood[0], neighborhood[1], neighborhood[6], neighborhood[2]), 
-                    Yokoi_h(neighborhood[0], neighborhood[2], neighborhood[7], neighborhood[3]), 
-                    Yokoi_h(neighborhood[0], neighborhood[3], neighborhood[8], neighborhood[4]), 
+                    Yokoi_h(neighborhood[0], neighborhood[1],
+                            neighborhood[6], neighborhood[2]),
+                    Yokoi_h(neighborhood[0], neighborhood[2],
+                            neighborhood[7], neighborhood[3]),
+                    Yokoi_h(neighborhood[0], neighborhood[3],
+                            neighborhood[8], neighborhood[4]),
                     Yokoi_h(neighborhood[0], neighborhood[4], neighborhood[5], neighborhood[1]))
             else:
                 YokoiConnectivityNumber[y, x] = ' '
-    
+
     return YokoiConnectivityNumber
 
+
 def pairRelationship(matrix):
+    """
+    type IO numpy array    
+    """
     # 1: p, 2: q
-    
     r, c = matrix.shape
     paired_matrix = np.zeros(matrix.shape, dtype=int)
     for i in range(r):
         for j in range(c):
-            if matrix[i][j] != '1': # Yokoi number != 1
+            if matrix[i][j] != '1':      # Yokoi number != 1
                 paired_matrix[i][j] = 2  # Set to q
-            else:   #Yokoi number == 1
+            else:  # Yokoi number == 1
                 flag = True
-                neighbor4 = [(1,0), (0,-1), (-1,0), (0,1)]
+                neighbor4 = [(1, 0), (0, -1), (-1, 0), (0, 1)]
                 for m, n in neighbor4:
                     if 0 <= i+m < r and 0 <= j+n < c:
-                        if matrix[i+m][j+n] == '1':  # Exist a neighbor' Yokoi number = 1
+                        if matrix[i+m][j+n] == '1':   # Exist a neighbor' Yokoi number = 1
                             paired_matrix[i][j] = 1   # Set to p
                             flag = False
                             break
                 if flag:
                     paired_matrix[i][j] = 2
-                    
+
     return paired_matrix
 
-    
+
 def connectedShrink_h(b, c, d, e):
+    """
+    type of  b,c,d,e: int  return: int
+    """
     if b == c and (b != d or b != e):
         return 1
     else:
         return 0
-    
+
+
 def connectedShrink_f(a1, a2, a3, a4):
-    return  [a1, a2, a3, a4].count(1)==1
-    
-def connectedShrink(img, matrix):
-    img = np.array(img)
-    r, c = img.shape
+    """
+    type of  a1, a2, a3, a4: int  return: int
+    """
+    return [a1, a2, a3, a4].count(1) == 1
+
+
+def connectedShrink(originalImage, matrix):
+    """
+    type img: Image,matrix :numpy array   return: Image ,Int
+    """
+    ImageArray = np.array(originalImage)
+    r, c = ImageArray.shape
     flag = False
     for i in range(r):
         for j in range(c):
-            if img[i][j] == True:
-                
+            if ImageArray[i][j] == 1:
                 x = [0 for i in range(9)]
-                x[0] = img[i][j]
+                x[0] = ImageArray[i][j]
                 index = 0
-                neighbor8 = [(1,0), (0,-1), (-1,0), (0,1), (1,1), (1,-1), (-1,-1), (-1,1)]
+                neighbor8 = [(1, 0), (0, -1), (-1, 0), (0, 1),
+                             (1, 1), (1, -1), (-1, -1), (-1, 1)]
                 for m, n in neighbor8:
                     index += 1
                     if 0 <= i+m < r and 0 <= j+n < c:
-                        x[index] = img[i+m][j+n]
+                        x[index] = ImageArray[i+m][j+n]
 
                 a1 = connectedShrink_h(x[0], x[1], x[6], x[2])
                 a2 = connectedShrink_h(x[0], x[2], x[7], x[3])
                 a3 = connectedShrink_h(x[0], x[3], x[8], x[4])
                 a4 = connectedShrink_h(x[0], x[4], x[5], x[1])
-                
+
                 number = connectedShrink_f(a1, a2, a3, a4)
-                
-                if number == 1: # Yokoi number = 1 (edge)
-                    if matrix[i][j] == 1:
-                        img[i][j] = 0
-                        flag = True
+                # Yokoi number = 1 (edge) and pair relationship =2
+                if number == 1 and matrix[i][j] == 1:
+                    ImageArray[i][j] = 0
+                    flag = True
+    img = Image.fromarray(ImageArray)
     return img, flag
 
 
@@ -157,12 +180,10 @@ if __name__ == '__main__':
     downsampling_image.save('downsampling.bmp')
     thinning_image = downsampling_image.copy()
     check = True
-    iteration=1
+    iteration = 1
     while check:
+        iteration += 1
         yokoi_matrix = Yokoi(thinning_image)
         paired_matrix = pairRelationship(yokoi_matrix)
-        iteration+=1
         thinning_image, check = connectedShrink(thinning_image, paired_matrix)
-        thinning_image=Image.fromarray(thinning_image)
-    thinning_image.save('thinning.bmp')  
-        
+    thinning_image.save('thinning.bmp')
