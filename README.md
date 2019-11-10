@@ -4,20 +4,8 @@ Computer Vision I at NTU 2019 Fall.
 
 ## Indrocution
 
-This course has 10 homeworks. The 10 homeworks are as follows:
+This course has 10 homeworks.
 
-1. Basic Image Manipulation
-2. Basic Image Manipulation
-
-## Table of Contents
-
-<!--ts-->
-
-   1. [Environment](https://github.com/vincent0628/CV2019Fall/blob/master/README.md#environment)
-   2. [Basic Image Manipulation](https://github.com/vincent0628/CV2019Fall/blob/master/README.md#hw1-basic-image-manipulation)
-   3. [Basic Image Manipulation](https://github.com/vincent0628/CV2019Fall/blob/master/README.md#hw2-basic-image-manipulation)
-
-<!--te-->
 ## Environment
 
 * Programming Language: Python 3
