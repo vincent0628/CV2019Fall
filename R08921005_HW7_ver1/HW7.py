@@ -162,7 +162,7 @@ def connectedShrink(originalImage, matrix):
                 a4 = connectedShrink_h(x[0], x[4], x[5], x[1])
 
                 number = connectedShrink_f(a1, a2, a3, a4)
-                # Yokoi number = 1 (edge) and pair relationship =2
+                # Yokoi number = 1 (edge) and pair relationship =1
                 if number == 1 and matrix[i][j] == 1:
                     ImageArray[i][j] = 0
                     flag = True
