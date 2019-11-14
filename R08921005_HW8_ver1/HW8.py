@@ -9,11 +9,11 @@ import cv2
 import numpy as np
 import math
 
-kernel = [(-1,-2), (0,-2), (1,-2),
-          (-2,-1), (-1,-1), (0,-1), (1,-1), (2,-1),
-          (-2,0), (-1,0), (0,0), (1,0), (2,0),
-          (-2,1), (-1,1), (0,1), (1,1), (2,1),
-          (-1,2), (0,2), (-1,2)]
+kernel = [(-1, -2), (0, -2), (1, -2),
+          (-2, -1), (-1, -1), (0, -1), (1, -1), (2, -1),
+          (-2, 0), (-1, 0), (0, 0), (1, 0), (2, 0),
+          (-2, 1), (-1, 1), (0, 1), (1, 1), (2, 1),
+          (-1, 2), (0, 2), (-1, 2)]
 
 
 def gaussian_noise(img, amplitude):
@@ -22,7 +22,7 @@ def gaussian_noise(img, amplitude):
 
     for i in range(r):
         for j in range(c):
-            
+
             value = img[i][j] + amplitude*np.random.normal(0.0, 1.0, None)
 
             if value > 255:
@@ -32,12 +32,13 @@ def gaussian_noise(img, amplitude):
 
     return gaussianNoiseImg
 
+
 def salt_pepper(img, prob):
     r, c = img.shape
-    saltPepperImg  = np.zeros(img.shape, dtype=np.uint8)
+    saltPepperImg = np.zeros(img.shape, dtype=np.uint8)
     for i in range(r):
         for j in range(c):
-            
+
             value = np.random.uniform(0.0, 1.0, None)
 
             if value < prob:
@@ -48,9 +49,10 @@ def salt_pepper(img, prob):
                 saltPepperImg[i][j] = img[i][j]
     return saltPepperImg
 
+
 def box_filter(img, size):
     r, c = img.shape
-    boxFilterImg  = np.zeros(img.shape, dtype=np.uint8)
+    boxFilterImg = np.zeros(img.shape, dtype=np.uint8)
 
     for i in range(r):
         for j in range(c):
@@ -65,9 +67,10 @@ def box_filter(img, size):
             boxFilterImg[i][j] = int(total / count)
     return boxFilterImg
 
+
 def median_filter(img, size):
     r, c = img.shape
-    medianFilterImg  = np.zeros(img.shape, dtype=np.uint8)
+    medianFilterImg = np.zeros(img.shape, dtype=np.uint8)
     for i in range(r):
         for j in range(c):
             box_range = int(size/2)
@@ -82,10 +85,12 @@ def median_filter(img, size):
             mid = int(length/2)
 
             if length % 2 == 0:
-                medianFilterImg [i][j] = int((int(value[mid-1]) + int(value[mid])) / 2)
+                medianFilterImg[i][j] = int(
+                    (int(value[mid-1]) + int(value[mid])) / 2)
             else:
-                medianFilterImg [i][j] = value[mid]
-    return medianFilterImg 
+                medianFilterImg[i][j] = value[mid]
+    return medianFilterImg
+
 
 def dilation(img):
     r, c = img.shape
@@ -101,6 +106,7 @@ def dilation(img):
                     if 0 <= i+x < r and 0 <= j+y < c:
                         dilation_img[i+x][j+y] = maximum
     return dilation_img
+
 
 def erosion(img):
     r, c = img.shape
@@ -118,16 +124,19 @@ def erosion(img):
                 else:
                     set_to_min = False
                     break
-            
+
             if set_to_min:
                 erosion_img[i][j] = minimum
     return erosion_img
 
+
 def opening(img):
     return dilation(erosion(img))
 
+
 def closing(img):
-    return  erosion(dilation(img))
+    return erosion(dilation(img))
+
 
 def SNR(img, noise_img):
     r, c = img.shape
@@ -151,7 +160,7 @@ def SNR(img, noise_img):
     return 20*math.log10(math.sqrt(VS)/math.sqrt(VN))
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
 
     lena = cv2.imread('lena.bmp', cv2.IMREAD_GRAYSCALE)
 
@@ -159,7 +168,6 @@ if __name__=='__main__':
     gaussian_30 = gaussian_noise(lena, 30)
     salt_pepper_010 = salt_pepper(lena, 0.1)
     salt_pepper_005 = salt_pepper(lena, 0.05)
-
 
     box_3_gaussian_10 = box_filter(gaussian_10, 3)
     box_3_gaussian_30 = box_filter(gaussian_30, 3)
@@ -169,7 +177,7 @@ if __name__=='__main__':
     box_5_gaussian_30 = box_filter(gaussian_30, 5)
     box_5_saltpepper_010 = box_filter(salt_pepper_010, 5)
     box_5_saltpepper_005 = box_filter(salt_pepper_005, 5)
-    
+
     median_3_gaussian_10 = median_filter(gaussian_10, 3)
     median_3_gaussian_30 = median_filter(gaussian_30, 3)
     median_3_saltpepper_010 = median_filter(salt_pepper_010, 3)
@@ -178,7 +186,7 @@ if __name__=='__main__':
     median_5_gaussian_30 = median_filter(gaussian_30, 5)
     median_5_saltpepper_010 = median_filter(salt_pepper_010, 5)
     median_5_saltpepper_005 = median_filter(salt_pepper_005, 5)
-    
+
     closing_opening_gaussian_10 = closing(opening(gaussian_10))
     closing_opening_gaussian_30 = closing(opening(gaussian_30))
     closing_opening_saltpepper_010 = closing(opening(salt_pepper_010))
@@ -188,26 +196,24 @@ if __name__=='__main__':
     opening_closing_saltpepper_010 = opening(closing(salt_pepper_010))
     opening_closing_saltpepper_005 = opening(closing(salt_pepper_005))
 
-    
+    image = [gaussian_10, gaussian_30, salt_pepper_010, salt_pepper_005,
+             box_3_gaussian_10, box_3_gaussian_10, box_3_saltpepper_010, box_3_saltpepper_005,
+             box_5_gaussian_10, box_5_gaussian_30, box_5_saltpepper_010, box_5_saltpepper_005,
+             median_3_gaussian_10, median_3_gaussian_30, median_3_saltpepper_010, median_3_saltpepper_005,
+             median_5_gaussian_10, median_5_gaussian_30, median_5_saltpepper_010, median_5_saltpepper_005,
+             closing_opening_gaussian_10, closing_opening_gaussian_30, closing_opening_saltpepper_010, closing_opening_saltpepper_005,
+             opening_closing_gaussian_10, opening_closing_gaussian_30, opening_closing_saltpepper_010, opening_closing_saltpepper_005]
 
-    image=[gaussian_10, gaussian_30, salt_pepper_010, salt_pepper_005,
-          box_3_gaussian_10, box_3_gaussian_10, box_3_saltpepper_010, box_3_saltpepper_005,
-          box_5_gaussian_10, box_5_gaussian_30, box_5_saltpepper_010, box_5_saltpepper_005,
-          median_3_gaussian_10, median_3_gaussian_30, median_3_saltpepper_010, median_3_saltpepper_005,
-          median_5_gaussian_10, median_5_gaussian_30, median_5_saltpepper_010, median_5_saltpepper_005,
-          closing_opening_gaussian_10, closing_opening_gaussian_30, closing_opening_saltpepper_010, closing_opening_saltpepper_005,      
-          opening_closing_gaussian_10, opening_closing_gaussian_30, opening_closing_saltpepper_010, opening_closing_saltpepper_005]
-    
     imageName = ['gaussian_10', 'gaussian_30', 'salt_pepper_010', 'salt_pepper_005',
                  'box_3_gaussian_10', 'box_3_gaussian_10', 'box_3_saltpepper_010', 'box_3_saltpepper_005',
                  'box_5_gaussian_10', 'box_5_gaussian_30', 'box_5_saltpepper_010', 'box_5_saltpepper_005',
                  'median_3_gaussian_10', 'median_3_gaussian_30', 'median_3_saltpepper_010', 'median_3_saltpepper_005',
                  'median_5_gaussian_10', 'median_5_gaussian_30', 'median_5_saltpepper_010', 'median_5_saltpepper_005',
-                 'closing_opening_gaussian_10', 'closing_opening_gaussian_30', 'closing_opening_saltpepper_010','closing_opening_saltpepper_005',      
+                 'closing_opening_gaussian_10', 'closing_opening_gaussian_30', 'closing_opening_saltpepper_010', 'closing_opening_saltpepper_005',
                  'opening_closing_gaussian_10', 'opening_closing_gaussian_30', 'opening_closing_saltpepper_010', 'opening_closing_saltpepper_005']
-    
+
     f = open('SNR.txt', 'w')
-    for name,item in zip(imageName,image):
-        cv2.imwrite('output/'+name+'.bmp',item)
-        f.writelines(name+'.bmp'+str(SNR(lena,item))+'\n')
+    for name, item in zip(imageName, image):
+        cv2.imwrite('output/'+name+'.bmp', item)
+        f.writelines(name+'.bmp'+str(SNR(lena, item))+'\n')
     f.close()
