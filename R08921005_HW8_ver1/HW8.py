@@ -197,7 +197,7 @@ if __name__ == '__main__':
     opening_closing_saltpepper_005 = opening(closing(salt_pepper_005))
 
     image = [gaussian_10, gaussian_30, salt_pepper_010, salt_pepper_005,
-             box_3_gaussian_10, box_3_gaussian_10, box_3_saltpepper_010, box_3_saltpepper_005,
+             box_3_gaussian_10, box_3_gaussian_30, box_3_saltpepper_010, box_3_saltpepper_005,
              box_5_gaussian_10, box_5_gaussian_30, box_5_saltpepper_010, box_5_saltpepper_005,
              median_3_gaussian_10, median_3_gaussian_30, median_3_saltpepper_010, median_3_saltpepper_005,
              median_5_gaussian_10, median_5_gaussian_30, median_5_saltpepper_010, median_5_saltpepper_005,
@@ -205,7 +205,7 @@ if __name__ == '__main__':
              opening_closing_gaussian_10, opening_closing_gaussian_30, opening_closing_saltpepper_010, opening_closing_saltpepper_005]
 
     imageName = ['gaussian_10', 'gaussian_30', 'salt_pepper_010', 'salt_pepper_005',
-                 'box_3_gaussian_10', 'box_3_gaussian_10', 'box_3_saltpepper_010', 'box_3_saltpepper_005',
+                 'box_3_gaussian_10', 'box_3_gaussian_30', 'box_3_saltpepper_010', 'box_3_saltpepper_005',
                  'box_5_gaussian_10', 'box_5_gaussian_30', 'box_5_saltpepper_010', 'box_5_saltpepper_005',
                  'median_3_gaussian_10', 'median_3_gaussian_30', 'median_3_saltpepper_010', 'median_3_saltpepper_005',
                  'median_5_gaussian_10', 'median_5_gaussian_30', 'median_5_saltpepper_010', 'median_5_saltpepper_005',
@@ -215,5 +215,7 @@ if __name__ == '__main__':
     f = open('SNR.txt', 'w')
     for name, item in zip(imageName, image):
         cv2.imwrite('output/'+name+'.bmp', item)
-        f.writelines(name+'.bmp'+str(SNR(lena, item))+'\n')
+        currentItemSNR = round(SNR(lena, item),3)
+        f.writelines(name+', SNR = '+ str(currentItemSNR)+'\n')
     f.close()
+        

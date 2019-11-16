@@ -1,28 +1,28 @@
-gaussian_10.bmp13.607769851296261
-gaussian_30.bmp2.7992482670576377
-salt_pepper_010.bmp-2.114689871804993
-salt_pepper_005.bmp0.9066523210114975
-box_3_gaussian_10.bmp17.57035392903315
-box_3_gaussian_10.bmp17.57035392903315
-box_3_saltpepper_010.bmp6.303046602945715
-box_3_saltpepper_005.bmp9.387317229532304
-box_5_gaussian_10.bmp14.715085200691592
-box_5_gaussian_30.bmp11.686577313065579
-box_5_saltpepper_010.bmp8.466751414890728
-box_5_saltpepper_005.bmp11.055445011123723
-median_3_gaussian_10.bmp17.654339192310342
-median_3_gaussian_30.bmp10.920750021608603
-median_3_saltpepper_010.bmp14.613969483039613
-median_3_saltpepper_005.bmp19.06414216505745
-median_5_gaussian_10.bmp15.986104187972657
-median_5_gaussian_30.bmp12.630918313015009
-median_5_saltpepper_010.bmp15.559701696239475
-median_5_saltpepper_005.bmp16.307760105343686
-closing_opening_gaussian_10.bmp5.670071938519861
-closing_opening_gaussian_30.bmp5.960680276776521
-closing_opening_saltpepper_010.bmp-1.9884196652637938
-closing_opening_saltpepper_005.bmp3.7357930534757546
-opening_closing_gaussian_10.bmp5.083650342443625
-opening_closing_gaussian_30.bmp3.7123575639466995
-opening_closing_saltpepper_010.bmp-2.9291222332084788
-opening_closing_saltpepper_005.bmp3.409455955112452
+gaussian_10, SNR = 13.599
+gaussian_30, SNR = 2.858
+salt_pepper_010, SNR = -2.146
+salt_pepper_005, SNR = 0.931
+box_3_gaussian_10, SNR = 17.59
+box_3_gaussian_30, SNR = 10.82
+box_3_saltpepper_010, SNR = 6.271
+box_3_saltpepper_005, SNR = 9.456
+box_5_gaussian_10, SNR = 14.715
+box_5_gaussian_30, SNR = 11.729
+box_5_saltpepper_010, SNR = 8.43
+box_5_saltpepper_005, SNR = 11.114
+median_3_gaussian_10, SNR = 17.684
+median_3_gaussian_30, SNR = 10.907
+median_3_saltpepper_010, SNR = 14.949
+median_3_saltpepper_005, SNR = 19.204
+median_5_gaussian_10, SNR = 15.99
+median_5_gaussian_30, SNR = 12.602
+median_5_saltpepper_010, SNR = 15.702
+median_5_saltpepper_005, SNR = 16.31
+closing_opening_gaussian_10, SNR = 5.666
+closing_opening_gaussian_30, SNR = 5.98
+closing_opening_saltpepper_010, SNR = -2.103
+closing_opening_saltpepper_005, SNR = 3.833
+opening_closing_gaussian_10, SNR = 5.087
+opening_closing_gaussian_30, SNR = 3.941
+opening_closing_saltpepper_010, SNR = -2.987
+opening_closing_saltpepper_005, SNR = 3.314
